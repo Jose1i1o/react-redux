@@ -20,7 +20,7 @@ const Dashboard = () => {
         <CheckboxFeed label={'Bathrooms'} fields={bathrooms} />
         <CheckboxFeed label={'More filters'} fields={moreFilters} />
         <Dropdown />
-        <MultiRange min={0} max={1000} onChange={({ min, max }) => null} />
+        <MultiRange min={0} max={1000} onChange={() => null} />
       </Form>
       <List />
     </Container>
