@@ -1,13 +1,10 @@
 // checkbox x5
-import { Form } from "react-bootstrap";
+import { Form } from 'react-bootstrap'
 
 const Checkbox = (props) => {
-  const { field } = props;
-  console.log(field);
+  const { field } = props
 
-  const handleChange = (e) => {
-    if (e.target.checked) console.log(e.target.value);
-  };
+  const handleChange = (e) => {}
 
   return (
     <>
@@ -21,7 +18,7 @@ const Checkbox = (props) => {
         />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Checkbox;
+export default Checkbox
