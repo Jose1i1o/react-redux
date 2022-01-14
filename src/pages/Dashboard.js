@@ -5,6 +5,7 @@ import MultiRange from '../components/MultiRange'
 import { Container, Form } from 'react-bootstrap'
 import CheckboxFeed from '../components/Checkbox/CheckboxFeed'
 import List from '../components/List'
+import SearchBar from '../components/SearchBar'
 
 const Dashboard = () => {
   const [user, setUser] = useState()
@@ -43,6 +44,7 @@ const Dashboard = () => {
 
   return (
     <Container>
+      <SearchBar />
       <Form>
         <CheckboxFeed label={'type Of Home'} fields={typeOfHome} />
         <CheckboxFeed label={'Condition'} fields={condition} />
