@@ -3,7 +3,6 @@ import { Form } from 'react-bootstrap'
 const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(e.target.search.value)
   }
 
   return (
