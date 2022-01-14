@@ -6,8 +6,6 @@ import { Container, Form } from 'react-bootstrap'
 import CheckboxFeed from '../components/Checkbox/CheckboxFeed'
 import List from '../components/List'
 
-import db from '../db/server.json'
-
 const Dashboard = () => {
   const [user, setUser] = useState()
   const [properties, setProperties] = useState()
