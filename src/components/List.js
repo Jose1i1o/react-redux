@@ -1,28 +1,27 @@
 // import { useSelector } from 'react-redux';
-import { Container } from "react-bootstrap";
+import { Container, ListGroup } from 'react-bootstrap';
 
  
 const List = () => {
-    const flat = [1, 2, 3, 4];
-    const bedroom = ['sevilla', 'cartuja', 'país vasco', 'granda'];
+    const flat = ['sevilla', 'cartuja', 'país vasco', 'granda'];
+    const bedroom = [1, 2, 3, 4];
     const bathroom = [1, 2, 2, 1];
     const equiped = ['yes', 'no', 'no', 'yes'];
 
     return (
         <Container>
-            <p>List</p> 
-            <ul>
+            <ListGroup>
                 {flat.map((item, index) => {
                     return (
-                        <li key={index}>
-                            <p>{item}</p>
-                            <p>{bedroom[index]}</p>
-                            <p>{bathroom[index]}</p>
-                            <p>{equiped[index]}</p>
-                        </li>
+                        <ListGroup.Item key={index}>
+                            <span>{item} </span>
+                            <span>{bedroom[index]} </span>
+                            <span>{bathroom[index]} </span>
+                            <span>{equiped[index]} </span>
+                        </ListGroup.Item>
                     )
                 })}
-            </ul>
+            </ListGroup>
         </Container>
       );
 }
