@@ -1,26 +1,63 @@
+import React, { useEffect, useState } from 'react'
+import getData from '../config/getDb'
 import Dropdown from '../components/Dropdown'
 import MultiRange from '../components/MultiRange'
 import { Container, Form } from 'react-bootstrap'
 import CheckboxFeed from '../components/Checkbox/CheckboxFeed'
 import List from '../components/List'
 
+import db from '../db/server.json'
+
 const Dashboard = () => {
-  const typeOfHome = ['new', 'old']
-  const condition = ['Good Condition', 'Needs renovation']
-  const bedrooms = ['1', '2', '3']
-  const bathrooms = ['1', '2']
-  const moreFilters = ['Lift', 'Garden']
+  const [user, setUser] = useState()
+  const [properties, setProperties] = useState()
+  const [favorite, setFavorite] = useState()
+
+  useEffect(() => {
+    getData.get('/users').then((res) => {
+      setUser(res.data)
+    })
+    getData.get('/properties').then((res) => {
+      setProperties(res.data)
+    })
+    getData.get('/favorite').then((res) => {
+      setFavorite(res.data)
+    })
+  }, [])
+
+  const typeOfHome = filterOptions('type')
+  const condition = filterOptions('condition')
+  const bedrooms = filterOptions('room')
+  const bathrooms = filterOptions('bath')
+  const price = filterOptions('price')
+
+  function filterOptions(prop) {
+    let newArray = []
+    if (properties) {
+      properties.forEach((item) => {
+        if (!newArray.includes(item[prop])) {
+          newArray.push(item[prop])
+        }
+      })
+    }
+    return newArray
+  }
 
   return (
     <Container>
       <Form>
-        <CheckboxFeed label={'Type of home'} fields={typeOfHome} />
+        <CheckboxFeed label={'type Of Home'} fields={typeOfHome} />
         <CheckboxFeed label={'Condition'} fields={condition} />
         <CheckboxFeed label={'Bedrooms'} fields={bedrooms} />
         <CheckboxFeed label={'Bathrooms'} fields={bathrooms} />
-        <CheckboxFeed label={'More filters'} fields={moreFilters} />
         <Dropdown />
-        <MultiRange min={0} max={1000} onChange={() => null} />
+        {properties && (
+          <MultiRange
+            min={Math.min(...price)}
+            max={Math.max(...price)}
+            onChange={() => null}
+          />
+        )}
       </Form>
       <List />
     </Container>

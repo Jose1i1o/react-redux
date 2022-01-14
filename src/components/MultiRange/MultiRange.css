@@ -3,6 +3,10 @@
   width: 200px;
 }
 
+.slider__wrapper {
+  height: 100px;
+}
+
 .slider__track,
 .slider__range,
 .slider__left-value,
