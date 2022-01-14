@@ -1,9 +1,17 @@
-function App() {
+import { Routes, Route } from 'react-router-dom'
+
+
+import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
+
+
+const App = () => {
   return (
-    <div className="App">
-      <p>Hello</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
   );
-}
+};
 
 export default App;
