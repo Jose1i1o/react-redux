@@ -2,6 +2,8 @@ import Dropdown from '../components/Dropdown'
 import MultiRange from '../components/MultiRange'
 import { Container, Form } from 'react-bootstrap'
 import CheckboxFeed from '../components/Checkbox/CheckboxFeed'
+import List from '../components/List'
+import SearchBar from '../components/SearchBar'
 
 const Dashboard = () => {
   const typeOfHome = ['new', 'old']
@@ -12,6 +14,7 @@ const Dashboard = () => {
 
   return (
     <Container>
+      <SearchBar />
       <Form>
         <CheckboxFeed label={'Type of home'} fields={typeOfHome} />
         <CheckboxFeed label={'Condition'} fields={condition} />
