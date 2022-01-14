@@ -1,37 +1,37 @@
 // Dropdown x2
 
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Dropdown } from 'react-bootstrap'
 
 const DropdownItem = (props) => {
   const { field } = props
 
-  const handleChange = (e) => {}
+  const handleChange = (e) => {
+    console.log(e.target.value)
+  }
 
   return (
-      <Dropdown>
-        <Dropdown.Toggle
-          label={field}
+    <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Item
+            value={field}
+            onChange={handleChange}
         >
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item 
-            onChange={handleChange}
+        </Dropdown.Item>
+        <Dropdown.Item
             value={field}
-          >
-          </Dropdown.Item>
-          <Dropdown.Item
             onChange={handleChange}
+        >
+        </Dropdown.Item>
+        <Dropdown.Item
             value={field}
-          >
-          </Dropdown.Item>
-          <Dropdown.Item
             onChange={handleChange}
-            value={field}
-          >
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-  );
+        >
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  )
 }
 
 export default DropdownItem
