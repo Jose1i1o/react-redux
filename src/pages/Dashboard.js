@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import getData from '../config/getDb'
-import Dropdown from '../components/Dropdown'
+import DropdownFeed from '../components/Dropdown/DropdownFeed'
 import MultiRange from '../components/MultiRange'
 import { Container, Form } from 'react-bootstrap'
 import CheckboxFeed from '../components/Checkbox/CheckboxFeed'
@@ -14,6 +14,11 @@ const Dashboard = () => {
   const [properties, setProperties] = useState()
   const [favorite, setFavorite] = useState()
   const dispatch = useDispatch()
+
+  const moreFilters = ['Lift', 'Garden']
+  const equipment = ['Furnished', 'Unfurnished', 'Indifferent']
+  const datePublication = ['Today', 'Last week', 'Last month']
+
 
   useEffect(() => {
     getData.get('/users').then((res) => {
@@ -55,7 +60,10 @@ const Dashboard = () => {
         <CheckboxFeed label={'Condition'} fields={condition} />
         <CheckboxFeed label={'Bedrooms'} fields={bedrooms} />
         <CheckboxFeed label={'Bathrooms'} fields={bathrooms} />
-        <Dropdown />
+        <CheckboxFeed label={'More filters'} fields={moreFilters} />
+        <DropdownFeed label={'Equipment'} fields={equipment} />
+        <DropdownFeed label={'Dropdown Date'} fields={datePublication} />
+        <MultiRange min={0} max={1000} onChange={({ min, max }) => null} />
         {properties && (
           <MultiRange
             min={Math.min(...price)}
