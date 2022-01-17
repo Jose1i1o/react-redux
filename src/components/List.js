@@ -19,10 +19,10 @@ const List = () => {
           flat.map((item) => {
             return (
               <ListGroup.Item key={item.id}>
-                <span>{item.street} </span>
-                <span>{item.room} </span>
-                <span>{item.bath} </span>
-                <span>{item.price} </span>
+                <span>Address: {item.street} </span>
+                <span>Rooms: {item.room} </span>
+                <span>Bath: {item.bath} </span>
+                <span>Price: {item.price}€ </span>
               </ListGroup.Item>
             )
           })}
