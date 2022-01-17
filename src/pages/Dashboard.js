@@ -6,11 +6,14 @@ import { Container, Form } from 'react-bootstrap'
 import CheckboxFeed from '../components/Checkbox/CheckboxFeed'
 import List from '../components/List'
 import SearchBar from '../components/SearchBar'
+import { useDispatch } from 'react-redux'
+import { loadProperties } from '../redux/loadProperties/actions'
 
 const Dashboard = () => {
   const [user, setUser] = useState()
   const [properties, setProperties] = useState()
   const [favorite, setFavorite] = useState()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     getData.get('/users').then((res) => {
@@ -18,6 +21,8 @@ const Dashboard = () => {
     })
     getData.get('/properties').then((res) => {
       setProperties(res.data)
+      // console.log(res.data)
+      dispatch(loadProperties(res.data))
     })
     getData.get('/favorite').then((res) => {
       setFavorite(res.data)
