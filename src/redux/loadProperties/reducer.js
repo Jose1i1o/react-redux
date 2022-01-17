@@ -1,4 +1,3 @@
-// reducer
 import { LOAD_PROPERTIES, SEARCH_FILTER, FILTER_PROPERTIES } from './types'
 import initialState from './state'
 
@@ -16,8 +15,6 @@ const reducer = (state = initialState, action) => {
       const filtered = action.payload.filter((res) =>
         res.street.includes(state.filters)
       )
-      console.log(filtered)
-      console.log(action.payload)
 
       return {
         ...state,

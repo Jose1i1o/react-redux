@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { searchFilter } from '../redux/loadProperties/actions'
-import { Form } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 
 const SearchBar = () => {
   const dispatch = useDispatch()
@@ -13,7 +13,7 @@ const SearchBar = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="d-flex mb-3">
       <Form.Control
         name="search"
         className="mb-3"
@@ -21,7 +21,7 @@ const SearchBar = () => {
         id="search"
         onChange={(e) => setResult(e.target.value)}
       />
-      <button>Submit</button>
+      <Button type="submit">Send</Button>
     </Form>
   )
 }
