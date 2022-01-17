@@ -9,13 +9,12 @@ const List = () => {
   // const equiped = ['yes', 'no', 'no', 'yes']
 
   const { properties } = useSelector((state) => state.load)
-  // console.log(properties);
   const flat = properties
 
   return (
     <Container>
       <ListGroup>
-        {flat &&
+        {flat.length > 0 &&
           flat.map((item) => {
             return (
               <ListGroup.Item key={item.id}>

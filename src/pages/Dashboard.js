@@ -6,32 +6,23 @@ import { Container, Form } from 'react-bootstrap'
 import CheckboxFeed from '../components/Checkbox/CheckboxFeed'
 import List from '../components/List'
 import SearchBar from '../components/SearchBar'
-import { useDispatch } from 'react-redux'
-import { loadProperties } from '../redux/loadProperties/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { setFiltered } from '../redux/loadProperties/actions'
 
 const Dashboard = () => {
   const [user, setUser] = useState()
   const [properties, setProperties] = useState()
   const [favorite, setFavorite] = useState()
   const dispatch = useDispatch()
+  const { filters } = useSelector((state) => state.load)
 
   const moreFilters = ['Lift', 'Garden']
   const equipment = ['Furnished', 'Unfurnished', 'Indifferent']
   const datePublication = ['Today', 'Last week', 'Last month']
 
   useEffect(() => {
-    getData.get('/users').then((res) => {
-      setUser(res.data)
-    })
-    getData.get('/properties').then((res) => {
-      setProperties(res.data)
-      // console.log(res.data)
-      dispatch(loadProperties(res.data))
-    })
-    getData.get('/favorite').then((res) => {
-      setFavorite(res.data)
-    })
-  }, [])
+    dispatch(setFiltered())
+  }, [filters])
 
   const typeOfHome = filterOptions('type')
   const condition = filterOptions('condition')
