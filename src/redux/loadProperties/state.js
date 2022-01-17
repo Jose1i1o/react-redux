@@ -1,4 +1,4 @@
 // state
-const initialState = { properties: [] }
+const initialState = { properties: [], filters: {} }
 
 export default initialState
