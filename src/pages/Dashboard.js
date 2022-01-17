@@ -19,7 +19,6 @@ const Dashboard = () => {
   const equipment = ['Furnished', 'Unfurnished', 'Indifferent']
   const datePublication = ['Today', 'Last week', 'Last month']
 
-
   useEffect(() => {
     getData.get('/users').then((res) => {
       setUser(res.data)
@@ -63,7 +62,7 @@ const Dashboard = () => {
         <CheckboxFeed label={'More filters'} fields={moreFilters} />
         <DropdownFeed label={'Equipment'} fields={equipment} />
         <DropdownFeed label={'Dropdown Date'} fields={datePublication} />
-        <MultiRange min={0} max={1000} onChange={({ min, max }) => null} />
+
         {properties && (
           <MultiRange
             min={Math.min(...price)}
