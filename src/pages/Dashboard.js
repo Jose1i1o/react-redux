@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import getData from '../config/getDb'
-import MultiRange from '../components/MultiRange'
 import { Container } from 'react-bootstrap'
 import List from '../components/List'
 import SearchBar from '../components/SearchBar'
@@ -32,7 +31,6 @@ const Dashboard = () => {
     })
     getData.get('/properties').then((res) => {
       setProperties(res.data)
-      // console.log(res.data)
       dispatch(loadProperties(res.data))
     })
     getData.get('/favorite').then((res) => {
