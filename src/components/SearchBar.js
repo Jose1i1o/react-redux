@@ -1,4 +1,4 @@
-import { Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 
 const SearchBar = () => {
   const handleSubmit = (e) => {
@@ -6,8 +6,9 @@ const SearchBar = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Control name="search" className="mb-3" type="text" id="search" />
+    <Form onSubmit={handleSubmit} className="d-flex mb-3">
+      <Form.Control name="search" type="text" id="search" />
+      <Button type="submit">Send</Button>
     </Form>
   )
 }
