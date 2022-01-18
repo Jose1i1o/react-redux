@@ -20,7 +20,7 @@ const Filter = () => {
 
   const { filters } = useSelector((state) => state.load)
 
-  const handleChange = (e) => {
+  const handleChangeType = (e) => {
     dispatch(
       setFiltered({
         ...filters,
@@ -31,6 +31,31 @@ const Filter = () => {
       })
     )
   }
+
+  const handleChangeCondition = (e) => {
+    dispatch(
+      setFiltered({
+        ...filters,
+        condition: {
+          ...filters.condition,
+          [e.target.value]: e.target.checked ? true : false,
+        },
+      })
+    )
+  }
+
+  const handleChangeBedroom = (e) => {
+    dispatch(
+      setFiltered({
+        ...filters,
+        room: {
+          ...filters.room,
+          [e.target.value]: e.target.checked ? true : false,
+        },
+      })
+    )
+  }
+
   return (
     <Form className="d-flex">
       <div className="px-3">
@@ -40,27 +65,26 @@ const Filter = () => {
             type="checkbox"
             value={'flat/apartment'}
             label={'Flat or apartment'}
-            onChange={handleChange}
-            // onChange={handleChange}
+            onChange={handleChangeType}
           />
           <Form.Check
             type="checkbox"
             value={'house'}
             label={'House'}
             id={'House'}
-            onChange={handleChange}
+            onChange={handleChangeType}
           />
           <Form.Check
             type="checkbox"
             value={'duplex'}
             label={'Duplex'}
-            onChange={handleChange}
+            onChange={handleChangeType}
           />
           <Form.Check
             type="checkbox"
             value={'penthouse'}
             label={'Penthouse'}
-            onChange={handleChange}
+            onChange={handleChangeType}
           />
         </Form.Group>
         <Form.Group className="mb-4">
@@ -69,25 +93,19 @@ const Filter = () => {
             type="checkbox"
             value={'new'}
             label={'New homes'}
-            // onChange={(e) =>
-            //   setType({ ...type, new: e.target.checked ? true : false })
-            // }
+            onChange={handleChangeCondition}
           />
           <Form.Check
             type="checkbox"
             value={'good'}
             label={'Good condition'}
-            // onChange={(e) =>
-            //   setType({ ...type, good: e.target.checked ? true : false })
-            // }
+            onChange={handleChangeCondition}
           />
           <Form.Check
             type="checkbox"
             value={'renovation'}
             label={'Needs renovation'}
-            // onChange={(e) =>
-            //   setType({ ...type, renovation: e.target.checked ? true : false })
-            // }
+            onChange={handleChangeCondition}
           />
         </Form.Group>
       </div>
@@ -96,35 +114,27 @@ const Filter = () => {
           <Form.Label>Bedrooms</Form.Label>
           <Form.Check
             type="checkbox"
-            value={1}
+            value={'1'}
             label={'1'}
-            // onChange={(e) =>
-            //   setType({ ...type, 1: e.target.checked ? true : false })
-            // }
+            onChange={handleChangeBedroom}
           />
           <Form.Check
             type="checkbox"
-            value={2}
+            value={'2'}
             label={'2'}
-            // onChange={(e) =>
-            //   setType({ ...type, 2: e.target.checked ? true : false })
-            // }
+            onChange={handleChangeBedroom}
           />
           <Form.Check
             type="checkbox"
-            value={3}
+            value={'3'}
             label={'3'}
-            // onChange={(e) =>
-            //   setType({ ...type, 3: e.target.checked ? true : false })
-            // }
+            onChange={handleChangeBedroom}
           />
           <Form.Check
             type="checkbox"
-            value={4}
+            value={'4'}
             label={'4+'}
-            // onChange={(e) =>
-            //   setType({ ...type, 4: e.target.checked ? true : false })
-            // }
+            onChange={handleChangeBedroom}
           />
         </Form.Group>
         <MultiRange min={30000} max={700000} onChange={() => null} />

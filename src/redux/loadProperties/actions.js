@@ -27,25 +27,61 @@ export const setFiltered = (filters) => {
 
       switch (value[0]) {
         case 'street':
-          query.push(`street_like=${value[1]}`)
+          if (value[1].length > 0) query.push(`street_like=${value[1]}`)
           break
         case 'type':
-          const filtering = Object.entries(value[1])
-          let arr = []
-          filtering.forEach((el) => {
+          let filtering1 = Object.entries(value[1])
+          let arr1 = []
+          filtering1.forEach((el) => {
             if (el[1] === true) {
-              arr.push(el[0])
+              arr1.push(el[0])
             }
           })
-          console.log(arr)
+          if (arr1.length > 0) {
+            const res1 = arr1.join('&type=')
+            query.push(`type=${res1}`)
+          }
+          break
 
-          query.push(`type=${arr[0]}`)
+        case 'condition':
+          let filtering2 = Object.entries(value[1])
+          let arr2 = []
+          filtering2.forEach((el) => {
+            if (el[1] === true) {
+              arr2.push(el[0])
+            }
+          })
+          if (arr2.length > 0) {
+            const res2 = arr2.join('&condition=')
+            query.push(`condition=${res2}`)
+          }
+          break
+
+        case 'room':
+          let filtering3 = Object.entries(value[1])
+          let arr3 = []
+          filtering3.forEach((el) => {
+            console.log(el)
+
+            if (el[1] === true) {
+              arr3.push(el[0])
+            }
+          })
+          if (arr3.length > 0) {
+            const res3 = arr3.join('&room=')
+
+            query.push(`room=${res3}`)
+          }
+          break
         default:
           break
       }
     })
     // console.log(query)
+    console.log(query)
     const concatQuery = query.join('&')
+
+    console.log(concatQuery)
 
     const properties = await getData
       .get(`/properties?${concatQuery}`)
