@@ -1,5 +1,7 @@
 import { Form } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setFilter } from '../../redux/loadProperties/actions'
 
 import MultiRange from '../MultiRange'
 
@@ -8,8 +10,18 @@ import MultiRange from '../MultiRange'
 // const handleChange = () => {
 
 // }
+// dispatch(
+//   setFilter({ type: e.target.checked ? e.target.value : null })
+// )
 
 const Filter = () => {
+  const dispatch = useDispatch()
+  const [type, setType] = useState({})
+  const { filters, properties } = useSelector((state) => state.load)
+  useEffect(() => {
+    dispatch(setFilter(type))
+    console.log(filters)
+  }, [type])
   return (
     <Form className="d-flex">
       <div className="px-3">
@@ -19,34 +31,99 @@ const Filter = () => {
             type="checkbox"
             value={'flat/apartment'}
             label={'Flat or apartment'}
+            onChange={(e) =>
+              setType({ ...type, flat: e.target.checked ? true : false })
+            }
           />
           <Form.Check
             type="checkbox"
             value={'house'}
             label={'House'}
             id={'House'}
+            onChange={(e) =>
+              setType({ ...type, house: e.target.checked ? true : false })
+            }
           />
-          <Form.Check type="checkbox" value={'duplex'} label={'Duplex'} />
-          <Form.Check type="checkbox" value={'penthouse'} label={'Penthouse'} />
+          <Form.Check
+            type="checkbox"
+            value={'duplex'}
+            label={'Duplex'}
+            onChange={(e) =>
+              setType({ ...type, duplex: e.target.checked ? true : false })
+            }
+          />
+          <Form.Check
+            type="checkbox"
+            value={'penthouse'}
+            label={'Penthouse'}
+            onChange={(e) =>
+              setType({ ...type, penthouse: e.target.checked ? true : false })
+            }
+          />
         </Form.Group>
         <Form.Group className="mb-4">
           <Form.Label>Condition</Form.Label>
-          <Form.Check type="checkbox" value={'new'} label={'New homes'} />
-          <Form.Check type="checkbox" value={'good'} label={'Good condition'} />
+          <Form.Check
+            type="checkbox"
+            value={'new'}
+            label={'New homes'}
+            onChange={(e) =>
+              setType({ ...type, new: e.target.checked ? true : false })
+            }
+          />
+          <Form.Check
+            type="checkbox"
+            value={'good'}
+            label={'Good condition'}
+            onChange={(e) =>
+              setType({ ...type, good: e.target.checked ? true : false })
+            }
+          />
           <Form.Check
             type="checkbox"
             value={'renovation'}
             label={'Needs renovation'}
+            onChange={(e) =>
+              setType({ ...type, renovation: e.target.checked ? true : false })
+            }
           />
         </Form.Group>
       </div>
       <div className="px-3">
         <Form.Group className="mb-4">
           <Form.Label>Bedrooms</Form.Label>
-          <Form.Check type="checkbox" value={1} label={'1'} />
-          <Form.Check type="checkbox" value={2} label={'2'} />
-          <Form.Check type="checkbox" value={3} label={'3'} />
-          <Form.Check type="checkbox" value={4} label={'4+'} />
+          <Form.Check
+            type="checkbox"
+            value={1}
+            label={'1'}
+            onChange={(e) =>
+              setType({ ...type, 1: e.target.checked ? true : false })
+            }
+          />
+          <Form.Check
+            type="checkbox"
+            value={2}
+            label={'2'}
+            onChange={(e) =>
+              setType({ ...type, 2: e.target.checked ? true : false })
+            }
+          />
+          <Form.Check
+            type="checkbox"
+            value={3}
+            label={'3'}
+            onChange={(e) =>
+              setType({ ...type, 3: e.target.checked ? true : false })
+            }
+          />
+          <Form.Check
+            type="checkbox"
+            value={4}
+            label={'4+'}
+            onChange={(e) =>
+              setType({ ...type, 4: e.target.checked ? true : false })
+            }
+          />
         </Form.Group>
         <MultiRange min={30000} max={700000} onChange={() => null} />
       </div>
