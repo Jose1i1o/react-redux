@@ -17,29 +17,19 @@ import { isFocusable } from '@testing-library/user-event/dist/utils'
 
 const Filter = () => {
   const dispatch = useDispatch()
-  const [sanitizedFilter, setSanitizedFilter] = useState()
-  const [type, setType] = useState({})
+
   const { filters } = useSelector((state) => state.load)
 
-  useEffect(() => {
-    if (sanitizedFilter) dispatch(setFiltered(sanitizedFilter))
-  }, [sanitizedFilter])
-
-  // [house,duplex]
   const handleChange = (e) => {
-    setType({
-      ...type,
-      [e.target.value]: !e.target.checked ? true : false,
-    })
-    const entries = Object.entries(type)
-
-    const typesArr = []
-    entries.forEach((entry) => {
-      if (entry[1] === true) {
-        typesArr.push(entry[0])
-      }
-    })
-    setSanitizedFilter({ ...filters, type: typesArr })
+    dispatch(
+      setFiltered({
+        ...filters,
+        type: {
+          ...filters.type,
+          [e.target.value]: e.target.checked ? true : false,
+        },
+      })
+    )
   }
   return (
     <Form className="d-flex">

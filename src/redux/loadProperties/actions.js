@@ -16,22 +16,35 @@ export const filterProperties = (value) => ({
 })
 
 export const setFiltered = (filters) => {
+  // console.log(filters)
   return async (dispatch) => {
     dispatch(setFilter(filters)) // Guardamos filtros en estado de filtros
-    console.log(filters)
     const values = Object.entries(filters)
     const query = []
 
     values.forEach((value) => {
+      // console.log(value)
+
       switch (value[0]) {
         case 'street':
           query.push(`street_like=${value[1]}`)
+          break
         case 'type':
-          query.push(`type=${value[1][0]}`)
+          const filtering = Object.entries(value[1])
+          let arr = []
+          filtering.forEach((el) => {
+            if (el[1] === true) {
+              arr.push(el[0])
+            }
+          })
+          console.log(arr)
+
+          query.push(`type=${arr[0]}`)
         default:
           break
       }
     })
+    // console.log(query)
     const concatQuery = query.join('&')
 
     const properties = await getData
