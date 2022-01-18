@@ -1,4 +1,4 @@
-import { LOAD_PROPERTIES, SET_FILTER, FILTER_PROPERTIES } from './types'
+import { LOAD_PROPERTIES, SET_FILTER } from './types'
 import initialState from './state'
 
 const reducer = (state = initialState, action) => {
@@ -11,16 +11,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         filters: { ...state.filters, ...action.payload },
       }
-
-    // {filters: {street:''}, {flat:''}
-    // case FILTER_PROPERTIES:
-    //   const filtered = action.payload.filter((prop) => {
-    //     return prop.street.includes(state.filters.street)
-    //   })
-    //   return {
-    //     ...state,
-    //     properties: filtered,
-    //   }
     default: {
       return state
     }

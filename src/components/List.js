@@ -13,7 +13,7 @@ const List = () => {
   return (
     <Container>
       <ListGroup>
-        {flat.length > 0 &&
+        {flat &&
           flat.map((item) => {
             return (
               <ListGroup.Item key={item.id}>
