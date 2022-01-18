@@ -12,10 +12,9 @@ const reducer = (state = initialState, action) => {
         filters: action.payload,
       }
     case FILTER_PROPERTIES:
-      const filtered = action.payload.filter((res) =>
-        res.street.includes(state.filters)
-      )
-
+      const filtered = action.payload.filter((prop) => {
+        return prop.street.includes(state.filters.street)
+      })
       return {
         ...state,
         properties: filtered,

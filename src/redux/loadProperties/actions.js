@@ -1,10 +1,9 @@
 import getData from '../../config/getDb'
 import { LOAD_PROPERTIES, SEARCH_FILTER, FILTER_PROPERTIES } from './types'
 
-export const loadProperties = (value) => ({
-  type: LOAD_PROPERTIES,
-  payload: value,
-})
+export const loadProperties = (value) => {
+  return { type: LOAD_PROPERTIES, payload: value }
+}
 
 export const searchFilter = (value) => ({
   type: SEARCH_FILTER,
@@ -18,8 +17,8 @@ export const filterProperties = (value) => ({
 
 export const setFiltered = () => {
   return async (dispatch) => {
-    dispatch(searchFilter)
-    const properties = await getData.get('/properties').then((res) => res.data)
-    dispatch(filterProperties(properties))
+    dispatch(searchFilter) // Guardamos filtros en estado de filtros
+    const properties = await getData.get('/properties').then((res) => res.data) // Hacemos peticion JSON Server con nuestros filtros
+    dispatch(filterProperties(properties)) // Guardamos en el estado los datos del JSON Server
   }
 }

@@ -4,11 +4,12 @@ import { Container } from 'react-bootstrap'
 import List from '../components/List'
 import SearchBar from '../components/SearchBar'
 import Filter from '../components/Filters/Filter'
-import { setFiltered } from '../redux/loadProperties/actions'
+import { setFiltered, loadProperties } from '../redux/loadProperties/actions'
+import getData from '../config/getDb'
 
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const { filters } = useSelector((state) => state.load)
+  const { filters, properties } = useSelector((state) => state.load)
 
   // json filters = {
   //   type:["flat",...],
@@ -23,7 +24,13 @@ const Dashboard = () => {
   // }
 
   useEffect(() => {
-    dispatch(setFiltered())
+    getData.get('/properties').then((res) => {
+      dispatch(loadProperties(res.data))
+    })
+  }, [])
+
+  useEffect(() => {
+    if (Object.entries(filters).length > 0) dispatch(setFiltered())
   }, [filters])
 
   return (

@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux'
 import { Container, ListGroup } from 'react-bootstrap'
-import { useEffect } from 'react'
 
 const List = () => {
   // const flat = ['sevilla', 'cartuja', 'país vasco', 'granda']

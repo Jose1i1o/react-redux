@@ -1,6 +1,13 @@
 import { Form } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
 
 import MultiRange from '../MultiRange'
+
+// const { filters, properties } = useSelector((state) => state.load)
+
+// const handleChange = () => {
+
+// }
 
 const Filter = () => {
   return (
