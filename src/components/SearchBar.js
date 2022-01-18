@@ -21,7 +21,11 @@ const SearchBar = () => {
         id="search"
         onChange={(e) => setResult(e.target.value)}
       />
-      <Button type="submit">Send</Button>
+      <span>
+      <Button variant="primary" type="submit">
+        Search
+      </Button>
+      </span>
     </Form>
   )
 }

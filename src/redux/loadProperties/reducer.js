@@ -1,5 +1,5 @@
 import { LOAD_PROPERTIES, SEARCH_FILTER, FILTER_PROPERTIES } from './types'
-import initialState from './state'
+import { initialState, INITIAL_FILTER_STATE } from './state'
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -26,4 +26,14 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-export default reducer
+const FilterReducer = (state = INITIAL_FILTER_STATE, action) => {
+  switch (action.type) {
+    case FILTER_PROPERTIES:
+      return { ...state, value: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export { reducer, FilterReducer }

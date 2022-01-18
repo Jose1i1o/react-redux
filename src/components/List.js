@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux'
 import { Container, ListGroup } from 'react-bootstrap'
 import { useEffect } from 'react'
+import {FaBath, FaBed} from 'react-icons/fa'
+import {BsHouse} from 'react-icons/bs'
 
 const List = () => {
   // const flat = ['sevilla', 'cartuja', 'país vasco', 'granda']
@@ -18,13 +20,22 @@ const List = () => {
           flat.map((item) => {
             return (
               <ListGroup.Item key={item.id}>
-                <span>Address: {item.street} </span>
-                <span>Rooms: {item.room} </span>
-                <span>Bath: {item.bath} </span>
-                <span>Price: {item.price}€ </span>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <h5>Address: {item.street}{item.city}</h5>
+                    <span>Price: {item.price}</span>
+                  </div>
+                  <div>
+                    <span>Characteristics: </span>
+                    <span className="m-4" ><FaBed />{item.room}</span>
+                    <span><FaBath className="m-4"/>{item.bath}</span>
+                    <span><BsHouse className="m-4"/>{item.size}</span>
+                    <span>{item.status}</span>
+                  </div>
+                </div>
               </ListGroup.Item>
-            )
-          })}
+              )
+            })}
       </ListGroup>
     </Container>
   )

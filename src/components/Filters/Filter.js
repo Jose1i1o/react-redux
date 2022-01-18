@@ -1,10 +1,24 @@
 import { Form } from 'react-bootstrap'
-
+import { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux'
+import { FilterReducer } from '../../redux/loadProperties/actions'
 import MultiRange from '../MultiRange'
 
 const Filter = () => {
+
+  const dispatch = useDispatch()
+  const [result, setResult] = useState([])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(result)
+    await dispatch(FilterReducer(result + ' ' + setResult))
+    console.log(FilterReducer(result + ' ' + setResult))
+  }
+
   return (
-    <Form className="d-flex">
+    <Form className="d-flex" onSubmit={handleSubmit}>
       <div className="px-3">
         <Form.Group className="mb-4">
           <Form.Label>Type of home</Form.Label>
@@ -12,34 +26,46 @@ const Filter = () => {
             type="checkbox"
             value={'flat/apartment'}
             label={'Flat or apartment'}
+            onChange={(e) => setResult(e.target.value)}
           />
           <Form.Check
             type="checkbox"
             value={'house'}
             label={'House'}
             id={'House'}
+            onChange={(e) => setResult(e.target.value)}
           />
-          <Form.Check type="checkbox" value={'duplex'} label={'Duplex'} />
-          <Form.Check type="checkbox" value={'penthouse'} label={'Penthouse'} />
+          <Form.Check type="checkbox" value={'duplex'} label={'Duplex'} onChange={(e) => setResult(e.target.value)}
+/>
+          <Form.Check type="checkbox" value={'penthouse'} label={'Penthouse'} onChange={(e) => setResult(e.target.value)}
+/>
         </Form.Group>
         <Form.Group className="mb-4">
           <Form.Label>Condition</Form.Label>
-          <Form.Check type="checkbox" value={'new'} label={'New homes'} />
-          <Form.Check type="checkbox" value={'good'} label={'Good condition'} />
+          <Form.Check type="checkbox" value={'new'} label={'New homes'}             onChange={(e) => setResult(e.target.value)}
+/>
+          <Form.Check type="checkbox" value={'good'} label={'Good condition'}             onChange={(e) => setResult(e.target.value)}
+/>
           <Form.Check
             type="checkbox"
             value={'renovation'}
             label={'Needs renovation'}
+            onChange={(e) => setResult(e.target.value)}
+
           />
         </Form.Group>
       </div>
       <div className="px-3">
         <Form.Group className="mb-4">
           <Form.Label>Bedrooms</Form.Label>
-          <Form.Check type="checkbox" value={1} label={'1'} />
-          <Form.Check type="checkbox" value={2} label={'2'} />
-          <Form.Check type="checkbox" value={3} label={'3'} />
-          <Form.Check type="checkbox" value={4} label={'4+'} />
+          <Form.Check type="checkbox" value={1} label={'1'}             onChange={(e) => setResult(e.target.value)}
+/>
+          <Form.Check type="checkbox" value={2} label={'2'}             onChange={(e) => setResult(e.target.value)}
+/>
+          <Form.Check type="checkbox" value={3} label={'3'}             onChange={(e) => setResult(e.target.value)}
+/>
+          <Form.Check type="checkbox" value={4} label={'4+'}             onChange={(e) => setResult(e.target.value)}
+/>
         </Form.Group>
         <MultiRange min={30000} max={700000} onChange={() => null} />
       </div>
@@ -88,6 +114,9 @@ const Filter = () => {
           <Form.Check type="checkbox" value={'terrace'} label={'Terrace'} />
         </Form.Group>
       </div>
+      <Button variant="primary" type="submit">
+        Search
+      </Button>
     </Form>
   )
 }
