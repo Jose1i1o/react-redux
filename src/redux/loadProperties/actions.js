@@ -20,6 +20,6 @@ export const setFiltered = () => {
   return async (dispatch) => {
     dispatch(searchFilter)
     const properties = await getData.get('/properties').then((res) => res.data)
-    dispatch(filterProperties(properties))
+    dispatch(loadProperties(properties))
   }
 }

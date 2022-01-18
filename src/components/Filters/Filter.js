@@ -1,8 +1,13 @@
+import { useState } from 'react'
 import { Form } from 'react-bootstrap'
-
 import MultiRange from '../MultiRange'
 
 const Filter = () => {
+  const [result, setResult] = useState('')
+  const handleChecked = (e) => {
+    setResult(e)
+    console.log(result)
+  }
   return (
     <Form className="d-flex">
       <div className="px-3">
@@ -12,15 +17,30 @@ const Filter = () => {
             type="checkbox"
             value={'flat/apartment'}
             label={'Flat or apartment'}
+            id={'flat'}
+            onClick={(e) => handleChecked(e.target.value)}
           />
           <Form.Check
             type="checkbox"
             value={'house'}
             label={'House'}
-            id={'House'}
+            id={'house'}
+            onClick={(e) => handleChecked(e.target.value)}
           />
-          <Form.Check type="checkbox" value={'duplex'} label={'Duplex'} />
-          <Form.Check type="checkbox" value={'penthouse'} label={'Penthouse'} />
+          <Form.Check
+            type="checkbox"
+            value={'duplex'}
+            label={'Duplex'}
+            id={'duplex'}
+            onClick={(e) => handleChecked(e.target.value)}
+          />
+          <Form.Check
+            type="checkbox"
+            value={'penthouse'}
+            label={'Penthouse'}
+            id={'penthouse'}
+            onClick={(e) => handleChecked(e.target.value)}
+          />
         </Form.Group>
         <Form.Group className="mb-4">
           <Form.Label>Condition</Form.Label>

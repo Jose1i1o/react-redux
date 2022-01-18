@@ -9,7 +9,7 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(searchFilter(result))
+    if (result) dispatch(searchFilter(result))
   }
 
   return (

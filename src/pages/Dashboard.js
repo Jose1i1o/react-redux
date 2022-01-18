@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap'
 import List from '../components/List'
 import SearchBar from '../components/SearchBar'
 import Filter from '../components/Filters/Filter'
-import { setFiltered } from '../redux/loadProperties/actions'
+import { setFiltered, searchFilter } from '../redux/loadProperties/actions'
 
 const Dashboard = () => {
   const dispatch = useDispatch()
@@ -24,6 +24,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(setFiltered())
+    dispatch(searchFilter)
   }, [filters])
 
   return (
