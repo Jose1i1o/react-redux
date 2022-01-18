@@ -73,6 +73,32 @@ export const setFiltered = (filters) => {
             query.push(`room=${res3}`)
           }
           break
+
+        case 'bath':
+          let filtering4 = Object.entries(value[1])
+          let arr4 = []
+          filtering4.forEach((el) => {
+            console.log(el)
+
+            if (el[1] === true) {
+              arr4.push(el[0])
+            }
+          })
+          if (arr4.length > 0) {
+            const res4 = arr4.join('&bath=')
+
+            query.push(`bath=${res4}`)
+          }
+          break
+
+        case 'price':
+          console.log(value)
+          // if (arr4.length > 0) {
+          //   const res4 = arr4.join('&bath=')
+
+          //   query.push(`bath=${res4}`)
+          // }
+          break
         default:
           break
       }

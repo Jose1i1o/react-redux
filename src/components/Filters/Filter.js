@@ -56,6 +56,18 @@ const Filter = () => {
     )
   }
 
+  const handleChangeBathroom = (e) => {
+    dispatch(
+      setFiltered({
+        ...filters,
+        bath: {
+          ...filters.bath,
+          [e.target.value]: e.target.checked ? true : false,
+        },
+      })
+    )
+  }
+
   return (
     <Form className="d-flex">
       <div className="px-3">
@@ -142,9 +154,24 @@ const Filter = () => {
       <div className="px-3">
         <Form.Group className="mb-4">
           <Form.Label>Bathrooms</Form.Label>
-          <Form.Check type="checkbox" value={1} label={'1'} />
-          <Form.Check type="checkbox" value={2} label={'2'} />
-          <Form.Check type="checkbox" value={3} label={'3+'} />
+          <Form.Check
+            type="checkbox"
+            value={1}
+            label={'1'}
+            onChange={handleChangeBathroom}
+          />
+          <Form.Check
+            type="checkbox"
+            value={2}
+            label={'2'}
+            onChange={handleChangeBathroom}
+          />
+          <Form.Check
+            type="checkbox"
+            value={3}
+            label={'3+'}
+            onChange={handleChangeBathroom}
+          />
         </Form.Group>
         <Form.Group className="mb-4">
           <Form.Label>Publication date</Form.Label>
