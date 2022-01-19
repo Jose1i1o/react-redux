@@ -142,7 +142,6 @@ export const setFiltered = (filters) => {
       }
     })
     const concatQuery = query.join('&')
-    console.log(concatQuery)
 
     const properties = await getData
       .get(`/properties?${concatQuery}`)
