@@ -25,18 +25,18 @@ export const setFiltered = (filters) => {
     values.forEach((value) => {
       switch (value[0]) {
         case 'street':
-          query.push(`street_like=${value[1]}`)
+          query.push(`street_like=${value[1]}`);
+          break;
         case 'type':
-          query.push(`type=${value[1][0]}`)
+          query.push(`type_like=${value[1]}`);
+          break;
         default:
-          break
+          break;
       }
     })
-    const concatQuery = query.join('&')
 
-    const properties = await getData
-      .get(`/properties?${concatQuery}`)
-      .then((res) => res.data) // Hacemos peticion JSON Server con nuestros filtros
-    dispatch(loadProperties(properties)) // Guardamos en el estado los datos del JSON Server
+    const url = `/properties?${query.join('&')}`
+    const res = await getData.get(url)
+    dispatch(loadProperties(res.data))
   }
 }
