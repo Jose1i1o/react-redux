@@ -13,7 +13,12 @@ const SearchBar = () => {
 
   return (
     <Form onSubmit={handleSubmit} className="d-flex mb-3">
-      <Form.Control name="search" type="text" id="search" />
+      <Form.Control
+        value={filters.street !== '' ? filters.street : ''}
+        name="search"
+        type="text"
+        id="search"
+      />
       <Button type="submit">Send</Button>
     </Form>
   )

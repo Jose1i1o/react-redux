@@ -1,3 +1,6 @@
-const initialState = { properties: [], filters: { street: '', type: [] } }
+const initialState = {
+  properties: [],
+  filters: { type: {}, condition: {}, room: {}, bath: {} },
+}
 
 export default initialState

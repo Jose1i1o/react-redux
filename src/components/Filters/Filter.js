@@ -1,13 +1,30 @@
+import { useEffect } from 'react'
 import { Form } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
-import { setFiltered } from '../../redux/loadProperties/actions'
+import getData from '../../config/getDb'
+import { loadProperties, setFiltered } from '../../redux/loadProperties/actions'
 
 import MultiRange from '../MultiRange'
 
 const Filter = () => {
   const dispatch = useDispatch()
-
   const { filters } = useSelector((state) => state.load)
+  console.log(filters)
+
+  useEffect(() => {
+    if (localStorage.getItem('filters')) {
+      const localStorageData = localStorage.getItem('filters')
+      dispatch(setFiltered(JSON.parse(localStorageData)))
+    } else {
+      getData.get('/properties').then((res) => {
+        dispatch(loadProperties(res.data))
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('filters', JSON.stringify(filters))
+  }, [filters])
 
   const handleChangeType = (e) => {
     dispatch(
@@ -107,6 +124,7 @@ const Filter = () => {
         <Form.Group className="mb-4">
           <Form.Label>Type of home</Form.Label>
           <Form.Check
+            checked={filters['type']['flat/apartment'] === true ? true : false}
             id="flat/apartment"
             type="checkbox"
             value={'flat/apartment'}
@@ -114,6 +132,7 @@ const Filter = () => {
             onChange={handleChangeType}
           />
           <Form.Check
+            checked={filters['type']['house'] === true ? true : false}
             type="checkbox"
             value={'house'}
             label={'House'}
@@ -121,6 +140,7 @@ const Filter = () => {
             onChange={handleChangeType}
           />
           <Form.Check
+            checked={filters['type']['duplex'] === true ? true : false}
             id="duplex"
             type="checkbox"
             value={'duplex'}
@@ -128,6 +148,7 @@ const Filter = () => {
             onChange={handleChangeType}
           />
           <Form.Check
+            checked={filters['type']['penthouse'] === true ? true : false}
             id="penthouse"
             type="checkbox"
             value={'penthouse'}
@@ -138,6 +159,7 @@ const Filter = () => {
         <Form.Group className="mb-4">
           <Form.Label>Condition</Form.Label>
           <Form.Check
+            checked={filters['condition']['new'] === true ? true : false}
             id="new"
             type="checkbox"
             value={'new'}
@@ -145,6 +167,7 @@ const Filter = () => {
             onChange={handleChangeCondition}
           />
           <Form.Check
+            checked={filters['condition']['good'] === true ? true : false}
             id="good"
             type="checkbox"
             value={'good'}
@@ -152,6 +175,7 @@ const Filter = () => {
             onChange={handleChangeCondition}
           />
           <Form.Check
+            checked={filters['condition']['renovation'] === true ? true : false}
             id="renovation"
             type="checkbox"
             value={'renovation'}
@@ -164,6 +188,7 @@ const Filter = () => {
         <Form.Group className="mb-4">
           <Form.Label>Bedrooms</Form.Label>
           <Form.Check
+            checked={filters['room']['1'] === true ? true : false}
             id="bed-1"
             type="checkbox"
             value={'1'}
@@ -171,6 +196,7 @@ const Filter = () => {
             onChange={handleChangeBedroom}
           />
           <Form.Check
+            checked={filters['room']['2'] === true ? true : false}
             id="bed-2"
             type="checkbox"
             value={'2'}
@@ -178,6 +204,7 @@ const Filter = () => {
             onChange={handleChangeBedroom}
           />
           <Form.Check
+            checked={filters['room']['3'] === true ? true : false}
             id="bed-3"
             type="checkbox"
             value={'3'}
@@ -185,6 +212,7 @@ const Filter = () => {
             onChange={handleChangeBedroom}
           />
           <Form.Check
+            checked={filters['room']['4+'] === true ? true : false}
             id="bed-4"
             type="checkbox"
             value={'4+'}
@@ -197,6 +225,7 @@ const Filter = () => {
           <Form.Label>Min price</Form.Label>
           <Form.Control
             name="min_price"
+            value={filters.min_price ? filters.min_price : ''}
             className="mb-3"
             type="text"
             id="min_price"
@@ -207,6 +236,7 @@ const Filter = () => {
           <Form.Label>Max Price</Form.Label>
           <Form.Control
             name="max_price"
+            value={filters.max_price ? filters.max_price : ''}
             className="mb-3"
             type="text"
             id="max_price"
@@ -218,6 +248,7 @@ const Filter = () => {
         <Form.Group className="mb-4">
           <Form.Label>Bathrooms</Form.Label>
           <Form.Check
+            checked={filters['bath']['1'] === true ? true : false}
             id="bath-1"
             type="checkbox"
             value={'1'}
@@ -225,6 +256,7 @@ const Filter = () => {
             onChange={handleChangeBathroom}
           />
           <Form.Check
+            checked={filters['bath']['2'] === true ? true : false}
             id="bath-2"
             type="checkbox"
             value={'2'}
@@ -232,6 +264,7 @@ const Filter = () => {
             onChange={handleChangeBathroom}
           />
           <Form.Check
+            checked={filters['bath']['3+'] === true ? true : false}
             id="bath-3"
             type="checkbox"
             value={'3+'}
@@ -258,8 +291,9 @@ const Filter = () => {
           <Form.Select
             aria-label="Default select example"
             onChange={handleChangeEquipment}
+            value={filters['equipment'] ? filters['equipment'] : ''}
           >
-            <option>Select equipment</option>
+            <option disabled>Select equipment</option>
             <option value="indifferent">Indifferent</option>
             <option value="furnished">Furnished</option>
             <option value="unfurnished">Unfurnished</option>

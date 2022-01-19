@@ -1,6 +1,5 @@
 import getData from '../../config/getDb'
 import { LOAD_PROPERTIES, SET_FILTER, FILTER_PROPERTIES } from './types'
-import { useSelector } from 'react-redux'
 
 export const loadProperties = (value) => {
   return { type: LOAD_PROPERTIES, payload: value }
@@ -133,10 +132,10 @@ export const setFiltered = (filters) => {
           break
 
         case 'min_price':
-          query.push(`price_gte=${value[1]}`)
+          if (value[1] !== '') query.push(`price_gte=${value[1]}`)
           break
         case 'max_price':
-          query.push(`price_lte=${value[1]}`)
+          if (value[1] !== '') query.push(`price_lte=${value[1]}`)
           break
         default:
           break
