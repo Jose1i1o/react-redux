@@ -78,17 +78,16 @@ const Filter = () => {
       )
     }
   }
-  // const handleChangeEquipment = (e) => {
-  //   console.log(e.target.value)
-  //   if (e.target.value !== 'null') {
-  //     dispatch(
-  //       setFiltered({
-  //         ...filters,
-  //         publication_date: e.target.value,
-  //       })
-  //     )
-  //   }
-  // }
+  const handleChangeEquipment = (e) => {
+    // if (e.target.value !== 'indifferent') {
+    dispatch(
+      setFiltered({
+        ...filters,
+        equipment: e.target.value,
+      })
+    )
+    //}
+  }
   const handleChangeMoreFilters = (e) => {
     dispatch(
       setFiltered({
@@ -224,10 +223,10 @@ const Filter = () => {
           <Form.Label>Equipment</Form.Label>
           <Form.Select
             aria-label="Default select example"
-            // onChange={handleChangeEquipment}
+            onChange={handleChangeEquipment}
           >
             <option>Select equipment</option>
-            <option value="no-pref">Indifferent</option>
+            <option value="indifferent">Indifferent</option>
             <option value="furnished">Furnished</option>
             <option value="unfurnished">Unfurnished</option>
           </Form.Select>

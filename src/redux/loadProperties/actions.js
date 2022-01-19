@@ -116,19 +116,18 @@ export const setFiltered = (filters) => {
           }
           break
 
-        // case 'type':
-        // let filtering1 = Object.entries(value[1])
-        // let arr1 = []
-        // filtering1.forEach((el) => {
-        //   if (el[1] === true) {
-        //     arr1.push(el[0])
-        //   }
-        // })
-        // if (arr1.length > 0) {
-        //   const res1 = arr1.join('&type=')
-        //   query.push(`type=${res1}`)
-        // }
-        // break
+        case 'equipment':
+          if (value[1] === 'indifferent') {
+            return
+          }
+          console.log(value)
+          let arr6 = []
+          arr6.push(value.join('='))
+          console.log(arr6)
+
+          query.push(arr6)
+
+          break
 
         default:
           break
