@@ -1,19 +1,8 @@
 import { Form } from 'react-bootstrap'
-import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setFiltered } from '../../redux/loadProperties/actions'
 
 import MultiRange from '../MultiRange'
-import { isFocusable } from '@testing-library/user-event/dist/utils'
-
-// const { filters, properties } = useSelector((state) => state.load)
-
-// const handleChange = () => {
-
-// }
-// dispatch(
-//   setFilter({ type: e.target.checked ? e.target.value : null })
-// )
 
 const Filter = () => {
   const dispatch = useDispatch()

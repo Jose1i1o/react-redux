@@ -2,11 +2,6 @@ import { useSelector } from 'react-redux'
 import { Container, ListGroup } from 'react-bootstrap'
 
 const List = () => {
-  // const flat = ['sevilla', 'cartuja', 'país vasco', 'granda']
-  // const bedroom = [1, 2, 3, 4]
-  // const bathroom = [1, 2, 2, 1]
-  // const equiped = ['yes', 'no', 'no', 'yes']
-
   const { properties } = useSelector((state) => state.load)
   const flat = properties
 

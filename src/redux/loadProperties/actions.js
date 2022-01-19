@@ -63,7 +63,6 @@ export const setFiltered = (filters) => {
                 const maxRoom = el[0].split('+')[0]
                 return query.push(`room_gte=${maxRoom}`)
               }
-              console.log(el)
               arr3.push(el[0])
             }
           })
@@ -113,14 +112,12 @@ export const setFiltered = (filters) => {
           let arr5 = []
           filtering5.forEach((el) => {
             if (el[1] === true) {
-              // console.log(el)
               arr5.push(el.join('='))
             }
           })
           if (arr5.length > 0) {
             const res5 = arr5.join('&')
             query.push(res5)
-            console.log(query)
           }
           break
 
