@@ -118,6 +118,7 @@ const Filter = () => {
         <Form.Group className="mb-4">
           <Form.Label>Type of home</Form.Label>
           <Form.Check
+            id="flat/apartment"
             type="checkbox"
             value={'flat/apartment'}
             label={'Flat or apartment'}
@@ -127,16 +128,18 @@ const Filter = () => {
             type="checkbox"
             value={'house'}
             label={'House'}
-            id={'House'}
+            id="house"
             onChange={handleChangeType}
           />
           <Form.Check
+            id="duplex"
             type="checkbox"
             value={'duplex'}
             label={'Duplex'}
             onChange={handleChangeType}
           />
           <Form.Check
+            id="penthouse"
             type="checkbox"
             value={'penthouse'}
             label={'Penthouse'}
@@ -146,18 +149,21 @@ const Filter = () => {
         <Form.Group className="mb-4">
           <Form.Label>Condition</Form.Label>
           <Form.Check
+            id="new"
             type="checkbox"
             value={'new'}
             label={'New homes'}
             onChange={handleChangeCondition}
           />
           <Form.Check
+            id="good"
             type="checkbox"
             value={'good'}
             label={'Good condition'}
             onChange={handleChangeCondition}
           />
           <Form.Check
+            id="renovation"
             type="checkbox"
             value={'renovation'}
             label={'Needs renovation'}
@@ -169,26 +175,30 @@ const Filter = () => {
         <Form.Group className="mb-4">
           <Form.Label>Bedrooms</Form.Label>
           <Form.Check
+            id="bed-1"
             type="checkbox"
             value={'1'}
             label={'1'}
             onChange={handleChangeBedroom}
           />
           <Form.Check
+            id="bed-2"
             type="checkbox"
             value={'2'}
             label={'2'}
             onChange={handleChangeBedroom}
           />
           <Form.Check
+            id="bed-3"
             type="checkbox"
             value={'3'}
             label={'3'}
             onChange={handleChangeBedroom}
           />
           <Form.Check
+            id="bed-4"
             type="checkbox"
-            value={'4'}
+            value={'4+'}
             label={'4+'}
             onChange={handleChangeBedroom}
           />
@@ -219,20 +229,23 @@ const Filter = () => {
         <Form.Group className="mb-4">
           <Form.Label>Bathrooms</Form.Label>
           <Form.Check
+            id="bath-1"
             type="checkbox"
-            value={1}
+            value={'1'}
             label={'1'}
             onChange={handleChangeBathroom}
           />
           <Form.Check
+            id="bath-2"
             type="checkbox"
-            value={2}
+            value={'2'}
             label={'2'}
             onChange={handleChangeBathroom}
           />
           <Form.Check
+            id="bath-3"
             type="checkbox"
-            value={3}
+            value={'3+'}
             label={'3+'}
             onChange={handleChangeBathroom}
           />
@@ -266,36 +279,42 @@ const Filter = () => {
         <Form.Group className="mb-4">
           <Form.Label>More filters</Form.Label>
           <Form.Check
+            id="pet"
             type="checkbox"
             value={'pet'}
             label={'Pets allowed'}
             onChange={handleChangeMoreFilters}
           />
           <Form.Check
+            id="lift"
             type="checkbox"
             value={'lift'}
             label={'Lift'}
             onChange={handleChangeMoreFilters}
           />
           <Form.Check
+            id="garden"
             type="checkbox"
             value={'garden'}
             label={'Garden'}
             onChange={handleChangeMoreFilters}
           />
           <Form.Check
+            id="air_conditioning"
             type="checkbox"
             value={'air_conditioning'}
             label={'Air conditioning'}
             onChange={handleChangeMoreFilters}
           />
           <Form.Check
+            id="swimming_pool"
             type="checkbox"
             value={'swimming_pool'}
             label={'Swimming pool'}
             onChange={handleChangeMoreFilters}
           />
           <Form.Check
+            id="terrace"
             type="checkbox"
             value={'terrace'}
             label={'Terrace'}

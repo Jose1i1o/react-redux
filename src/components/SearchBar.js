@@ -13,7 +13,7 @@ const SearchBar = () => {
 
   return (
     <Form onSubmit={handleSubmit} className="d-flex mb-3">
-      <Form.Control name="search" className="mb-3" type="text" id="search" />
+      <Form.Control name="search" type="text" id="search" />
       <Button type="submit">Send</Button>
     </Form>
   )

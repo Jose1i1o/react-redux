@@ -9,7 +9,6 @@ import getData from '../config/getDb'
 
 const Dashboard = () => {
   const dispatch = useDispatch()
-  const { filters, properties } = useSelector((state) => state.load)
 
   useEffect(() => {
     getData.get('/properties').then((res) => {

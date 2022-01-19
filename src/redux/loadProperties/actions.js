@@ -17,7 +17,7 @@ export const filterProperties = (value) => ({
 
 export const setFiltered = (filters) => {
   return async (dispatch) => {
-    dispatch(setFilter(filters)) // Guardamos filtros en estado de filtros
+    dispatch(setFilter(filters))
     const values = Object.entries(filters)
     const query = []
 
@@ -59,6 +59,11 @@ export const setFiltered = (filters) => {
           let arr3 = []
           filtering3.forEach((el) => {
             if (el[1] === true) {
+              if (el[0].includes('+')) {
+                const maxRoom = el[0].split('+')[0]
+                return query.push(`room_gte=${maxRoom}`)
+              }
+              console.log(el)
               arr3.push(el[0])
             }
           })
@@ -74,6 +79,11 @@ export const setFiltered = (filters) => {
           let arr4 = []
           filtering4.forEach((el) => {
             if (el[1] === true) {
+              if (el[0].includes('+')) {
+                const maxBathRoom = el[0].split('+')[0]
+                return query.push(`bath_gte=${maxBathRoom}`)
+              }
+
               arr4.push(el[0])
             }
           })
@@ -89,15 +99,13 @@ export const setFiltered = (filters) => {
           if (value[1] === 'null') return
 
           date.setDate(date.getDate() - value[1])
-          // if (arr4.length > 0) {
-          //   const res4 = arr4.join('&bath=')
+
           const handleDate = date
             .toISOString()
             .split('.')[0]
             .split('T')
             .join(' ')
           query.push(`publication_date_gte=${handleDate}`)
-          // }
           break
 
         case 'more_filters':
@@ -110,7 +118,6 @@ export const setFiltered = (filters) => {
             }
           })
           if (arr5.length > 0) {
-            // console.log(arr5)
             const res5 = arr5.join('&')
             query.push(res5)
             console.log(query)
@@ -138,10 +145,7 @@ export const setFiltered = (filters) => {
           break
       }
     })
-    console.log(query)
     const concatQuery = query.join('&')
-
-    console.log(concatQuery)
 
     const properties = await getData
       .get(`/properties?${concatQuery}`)
