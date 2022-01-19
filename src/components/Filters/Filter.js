@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setFiltered } from '../../redux/loadProperties/actions'
 
 import MultiRange from '../MultiRange'
+import { isFocusable } from '@testing-library/user-event/dist/utils'
 
 // const { filters, properties } = useSelector((state) => state.load)
 
@@ -16,12 +17,30 @@ import MultiRange from '../MultiRange'
 
 const Filter = () => {
   const dispatch = useDispatch()
+  const [sanitizedFilter, setSanitizedFilter] = useState()
   const [type, setType] = useState({})
-  const { filters, properties } = useSelector((state) => state.load)
+  const { filters } = useSelector((state) => state.load)
+
   useEffect(() => {
-    dispatch(setFiltered(type))
-    // console.log(filters)
-  }, [type])
+    if (sanitizedFilter) dispatch(setFiltered(sanitizedFilter))
+  }, [dispatch, sanitizedFilter])
+
+  // [house,duplex]
+  const handleChange = (e) => {
+    setType({
+      ...type,
+      [e.target.value]: !e.target.checked ? true : false,
+    })
+    const entries = Object.entries(type)
+
+    const typesArr = []
+    entries.forEach((entry) => {
+      if (entry[1] === true) {
+        typesArr.push(entry[0])
+      }
+    })
+    setSanitizedFilter({ ...filters, type: typesArr })
+  }
   return (
     <Form className="d-flex">
       <div className="px-3">
@@ -31,34 +50,26 @@ const Filter = () => {
             type="checkbox"
             value={'flat/apartment'}
             label={'Flat or apartment'}
-            onChange={(e) =>
-              setType({ ...type, flat: e.target.checked ? true : false })
-            }
+            onChange={handleChange}
           />
           <Form.Check
             type="checkbox"
             value={'house'}
             label={'House'}
             id={'House'}
-            onChange={(e) =>
-              setType({ ...type, house: e.target.checked ? true : false })
-            }
+            onChange={handleChange}
           />
           <Form.Check
             type="checkbox"
             value={'duplex'}
             label={'Duplex'}
-            onChange={(e) =>
-              setType({ ...type, duplex: e.target.checked ? true : false })
-            }
+            onChange={handleChange}
           />
           <Form.Check
             type="checkbox"
             value={'penthouse'}
             label={'Penthouse'}
-            onChange={(e) =>
-              setType({ ...type, penthouse: e.target.checked ? true : false })
-            }
+            onChange={handleChange}
           />
         </Form.Group>
         <Form.Group className="mb-4">
@@ -67,25 +78,25 @@ const Filter = () => {
             type="checkbox"
             value={'new'}
             label={'New homes'}
-            onChange={(e) =>
-              setType({ ...type, new: e.target.checked ? true : false })
-            }
+            // onChange={(e) =>
+            //   setType({ ...type, new: e.target.checked ? true : false })
+            // }
           />
           <Form.Check
             type="checkbox"
             value={'good'}
             label={'Good condition'}
-            onChange={(e) =>
-              setType({ ...type, good: e.target.checked ? true : false })
-            }
+            // onChange={(e) =>
+            //   setType({ ...type, good: e.target.checked ? true : false })
+            // }
           />
           <Form.Check
             type="checkbox"
             value={'renovation'}
             label={'Needs renovation'}
-            onChange={(e) =>
-              setType({ ...type, renovation: e.target.checked ? true : false })
-            }
+            // onChange={(e) =>
+            //   setType({ ...type, renovation: e.target.checked ? true : false })
+            // }
           />
         </Form.Group>
       </div>
@@ -96,33 +107,33 @@ const Filter = () => {
             type="checkbox"
             value={1}
             label={'1'}
-            onChange={(e) =>
-              setType({ ...type, 1: e.target.checked ? true : false })
-            }
+            // onChange={(e) =>
+            //   setType({ ...type, 1: e.target.checked ? true : false })
+            // }
           />
           <Form.Check
             type="checkbox"
             value={2}
             label={'2'}
-            onChange={(e) =>
-              setType({ ...type, 2: e.target.checked ? true : false })
-            }
+            // onChange={(e) =>
+            //   setType({ ...type, 2: e.target.checked ? true : false })
+            // }
           />
           <Form.Check
             type="checkbox"
             value={3}
             label={'3'}
-            onChange={(e) =>
-              setType({ ...type, 3: e.target.checked ? true : false })
-            }
+            // onChange={(e) =>
+            //   setType({ ...type, 3: e.target.checked ? true : false })
+            // }
           />
           <Form.Check
             type="checkbox"
             value={4}
             label={'4+'}
-            onChange={(e) =>
-              setType({ ...type, 4: e.target.checked ? true : false })
-            }
+            // onChange={(e) =>
+            //   setType({ ...type, 4: e.target.checked ? true : false })
+            // }
           />
         </Form.Group>
         <MultiRange min={30000} max={700000} onChange={() => null} />
