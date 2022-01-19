@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setFilter } from '../../redux/loadProperties/actions'
+import { setFiltered } from '../../redux/loadProperties/actions'
 
 import MultiRange from '../MultiRange'
 
@@ -18,12 +18,10 @@ const Filter = () => {
   const dispatch = useDispatch()
   const [type, setType] = useState({})
   const { filters, properties } = useSelector((state) => state.load)
-
   useEffect(() => {
-    dispatch(setFilter(type))
-    console.log(filters)
+    dispatch(setFiltered(type))
+    // console.log(filters)
   }, [type])
-  
   return (
     <Form className="d-flex">
       <div className="px-3">
