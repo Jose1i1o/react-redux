@@ -14,7 +14,7 @@ const SearchBar = () => {
   return (
     <Form onSubmit={handleSubmit} className="d-flex mb-3">
       <Form.Control
-        value={filters.street !== '' ? filters.street : ''}
+        defaultValue={filters.street !== '' ? filters.street : ''}
         name="search"
         type="text"
         id="search"

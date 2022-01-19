@@ -9,7 +9,6 @@ import MultiRange from '../MultiRange'
 const Filter = () => {
   const dispatch = useDispatch()
   const { filters } = useSelector((state) => state.load)
-  console.log(filters)
 
   useEffect(() => {
     if (localStorage.getItem('filters')) {
