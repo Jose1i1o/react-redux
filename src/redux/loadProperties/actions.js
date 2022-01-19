@@ -86,6 +86,7 @@ export const setFiltered = (filters) => {
 
         case 'publication_date':
           const date = new Date()
+          if (value[1] === 'null') return
 
           date.setDate(date.getDate() - value[1])
           // if (arr4.length > 0) {
@@ -120,29 +121,31 @@ export const setFiltered = (filters) => {
           if (value[1] === 'indifferent') {
             return
           }
-          console.log(value)
           let arr6 = []
           arr6.push(value.join('='))
-          console.log(arr6)
 
           query.push(arr6)
 
           break
 
+        case 'min_price':
+          query.push(`price_gte=${value[1]}`)
+          break
+        case 'max_price':
+          query.push(`price_lte=${value[1]}`)
+          break
         default:
           break
       }
     })
-    // console.log(query)
     console.log(query)
     const concatQuery = query.join('&')
-    // const concatQuery = `publication_date_gte=2020/12/01 01:01:01`
 
     console.log(concatQuery)
 
     const properties = await getData
       .get(`/properties?${concatQuery}`)
-      .then((res) => res.data) // Hacemos peticion JSON Server con nuestros filtros
-    dispatch(loadProperties(properties)) // Guardamos en el estado los datos del JSON Server
+      .then((res) => res.data)
+    dispatch(loadProperties(properties))
   }
 }

@@ -69,24 +69,20 @@ const Filter = () => {
   }
 
   const handleChangePublication = (e) => {
-    if (e.target.value !== 'null') {
-      dispatch(
-        setFiltered({
-          ...filters,
-          publication_date: e.target.value,
-        })
-      )
-    }
+    dispatch(
+      setFiltered({
+        ...filters,
+        publication_date: e.target.value,
+      })
+    )
   }
   const handleChangeEquipment = (e) => {
-    // if (e.target.value !== 'indifferent') {
     dispatch(
       setFiltered({
         ...filters,
         equipment: e.target.value,
       })
     )
-    //}
   }
   const handleChangeMoreFilters = (e) => {
     dispatch(
@@ -96,6 +92,22 @@ const Filter = () => {
           ...filters.more_filters,
           [e.target.value]: e.target.checked ? true : false,
         },
+      })
+    )
+  }
+  const handleMinPrice = (e) => {
+    dispatch(
+      setFiltered({
+        ...filters,
+        min_price: e.target.value,
+      })
+    )
+  }
+  const handleMaxPrice = (e) => {
+    dispatch(
+      setFiltered({
+        ...filters,
+        max_price: e.target.value,
       })
     )
   }
@@ -181,7 +193,27 @@ const Filter = () => {
             onChange={handleChangeBedroom}
           />
         </Form.Group>
-        <MultiRange min={30000} max={700000} onChange={() => null} />
+        {/* <MultiRange min={30000} max={700000} onChange={() => null} /> */}
+        <div>
+          <Form.Label>Min price</Form.Label>
+          <Form.Control
+            name="min_price"
+            className="mb-3"
+            type="text"
+            id="min_price"
+            onChange={handleMinPrice}
+          />
+        </div>
+        <div>
+          <Form.Label>Max Price</Form.Label>
+          <Form.Control
+            name="max_price"
+            className="mb-3"
+            type="text"
+            id="max_price"
+            onChange={handleMaxPrice}
+          />
+        </div>
       </div>
       <div className="px-3">
         <Form.Group className="mb-4">
