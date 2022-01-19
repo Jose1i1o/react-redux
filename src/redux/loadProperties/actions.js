@@ -16,15 +16,12 @@ export const filterProperties = (value) => ({
 })
 
 export const setFiltered = (filters) => {
-  // console.log(filters)
   return async (dispatch) => {
     dispatch(setFilter(filters)) // Guardamos filtros en estado de filtros
     const values = Object.entries(filters)
     const query = []
 
     values.forEach((value) => {
-      // console.log(value)
-
       switch (value[0]) {
         case 'street':
           if (value[1].length > 0) query.push(`street_like=${value[1]}`)
@@ -61,8 +58,6 @@ export const setFiltered = (filters) => {
           let filtering3 = Object.entries(value[1])
           let arr3 = []
           filtering3.forEach((el) => {
-            console.log(el)
-
             if (el[1] === true) {
               arr3.push(el[0])
             }
@@ -78,8 +73,6 @@ export const setFiltered = (filters) => {
           let filtering4 = Object.entries(value[1])
           let arr4 = []
           filtering4.forEach((el) => {
-            console.log(el)
-
             if (el[1] === true) {
               arr4.push(el[0])
             }
@@ -91,14 +84,52 @@ export const setFiltered = (filters) => {
           }
           break
 
-        case 'price':
-          console.log(value)
+        case 'publication_date':
+          const date = new Date()
+
+          date.setDate(date.getDate() - value[1])
           // if (arr4.length > 0) {
           //   const res4 = arr4.join('&bath=')
-
-          //   query.push(`bath=${res4}`)
+          const handleDate = date
+            .toISOString()
+            .split('.')[0]
+            .split('T')
+            .join(' ')
+          query.push(`publication_date_gte=${handleDate}`)
           // }
           break
+
+        case 'more_filters':
+          let filtering5 = Object.entries(value[1])
+          let arr5 = []
+          filtering5.forEach((el) => {
+            if (el[1] === true) {
+              // console.log(el)
+              arr5.push(el.join('='))
+            }
+          })
+          if (arr5.length > 0) {
+            // console.log(arr5)
+            const res5 = arr5.join('&')
+            query.push(res5)
+            console.log(query)
+          }
+          break
+
+        // case 'type':
+        // let filtering1 = Object.entries(value[1])
+        // let arr1 = []
+        // filtering1.forEach((el) => {
+        //   if (el[1] === true) {
+        //     arr1.push(el[0])
+        //   }
+        // })
+        // if (arr1.length > 0) {
+        //   const res1 = arr1.join('&type=')
+        //   query.push(`type=${res1}`)
+        // }
+        // break
+
         default:
           break
       }
@@ -106,6 +137,7 @@ export const setFiltered = (filters) => {
     // console.log(query)
     console.log(query)
     const concatQuery = query.join('&')
+    // const concatQuery = `publication_date_gte=2020/12/01 01:01:01`
 
     console.log(concatQuery)
 

@@ -68,6 +68,39 @@ const Filter = () => {
     )
   }
 
+  const handleChangePublication = (e) => {
+    if (e.target.value !== 'null') {
+      dispatch(
+        setFiltered({
+          ...filters,
+          publication_date: e.target.value,
+        })
+      )
+    }
+  }
+  // const handleChangeEquipment = (e) => {
+  //   console.log(e.target.value)
+  //   if (e.target.value !== 'null') {
+  //     dispatch(
+  //       setFiltered({
+  //         ...filters,
+  //         publication_date: e.target.value,
+  //       })
+  //     )
+  //   }
+  // }
+  const handleChangeMoreFilters = (e) => {
+    dispatch(
+      setFiltered({
+        ...filters,
+        more_filters: {
+          ...filters.more_filters,
+          [e.target.value]: e.target.checked ? true : false,
+        },
+      })
+    )
+  }
+
   return (
     <Form className="d-flex">
       <div className="px-3">
@@ -175,18 +208,24 @@ const Filter = () => {
         </Form.Group>
         <Form.Group className="mb-4">
           <Form.Label>Publication date</Form.Label>
-          <Form.Select aria-label="Default select example">
-            <option>Select publication date</option>
-            <option value="day">Last day</option>
-            <option value="week">Last week</option>
-            <option value="month">Last month</option>
+          <Form.Select
+            aria-label="Default select example"
+            onChange={handleChangePublication}
+          >
+            <option value="null">Select publication date</option>
+            <option value="1">Last day</option>
+            <option value="7">Last week</option>
+            <option value="30">Last month</option>
           </Form.Select>
         </Form.Group>
       </div>
       <div>
         <Form.Group className="mb-4">
           <Form.Label>Equipment</Form.Label>
-          <Form.Select aria-label="Default select example">
+          <Form.Select
+            aria-label="Default select example"
+            // onChange={handleChangeEquipment}
+          >
             <option>Select equipment</option>
             <option value="no-pref">Indifferent</option>
             <option value="furnished">Furnished</option>
@@ -195,20 +234,42 @@ const Filter = () => {
         </Form.Group>
         <Form.Group className="mb-4">
           <Form.Label>More filters</Form.Label>
-          <Form.Check type="checkbox" value={'pets'} label={'Pets allowed'} />
-          <Form.Check type="checkbox" value={'lift'} label={'Lift'} />
-          <Form.Check type="checkbox" value={'garden'} label={'Garden'} />
+          <Form.Check
+            type="checkbox"
+            value={'pet'}
+            label={'Pets allowed'}
+            onChange={handleChangeMoreFilters}
+          />
+          <Form.Check
+            type="checkbox"
+            value={'lift'}
+            label={'Lift'}
+            onChange={handleChangeMoreFilters}
+          />
+          <Form.Check
+            type="checkbox"
+            value={'garden'}
+            label={'Garden'}
+            onChange={handleChangeMoreFilters}
+          />
           <Form.Check
             type="checkbox"
             value={'air_conditioning'}
             label={'Air conditioning'}
+            onChange={handleChangeMoreFilters}
           />
           <Form.Check
             type="checkbox"
             value={'swimming_pool'}
             label={'Swimming pool'}
+            onChange={handleChangeMoreFilters}
           />
-          <Form.Check type="checkbox" value={'terrace'} label={'Terrace'} />
+          <Form.Check
+            type="checkbox"
+            value={'terrace'}
+            label={'Terrace'}
+            onChange={handleChangeMoreFilters}
+          />
         </Form.Group>
       </div>
     </Form>
